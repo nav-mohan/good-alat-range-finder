@@ -1,5 +1,9 @@
 # "Good" Lattice Constant Range-Finder
 
+The plots below show 
+* First 3 derivatives of Energy vs alat
+* First 3 orders of Local Energy Difference vs alat
+
 <h3> Silicon, MACE <h3>
  <img width = "1280px" src = "plots/alat-range-finder-Si-FCC-MACE-10-600.png"> 
 
