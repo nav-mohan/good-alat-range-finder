@@ -15,26 +15,26 @@ input_data = [
         "model": "SW_LeeHwang_2012GGA_Si__MO_040570764911_001",
         "model_shortname": "SW_LeeHwang"
     },
-    {
-        "species": ["Al"],
-        "model": "EAM_CubicNaturalSpline_ErcolessiAdams_1994_Al__MO_800509458712_003",
-        "model_shortname": "EAMCubinNaturalSpline"
-    },
-    {
-        "species": ["Ni", "Co", "Fe", "Cr", "Mn"],
-        "model": "TorchML_20231203_MACE_MP_0_128_L1_EP199__MO_000000000000_000",
-        "model_shortname": "MACE"
-    },
-    {
-        "species": ["Co", "Cr", "Fe", "Ni"],
-        "model": "TorchML_20231203_MACE_MP_0_128_L1_EP199__MO_000000000000_000",
-        "model_shortname": "MACE"
-    },
-    {
-        "species": ["Al", "Co", "Cr", "Fe", "Ni"],
-        "model": "TorchML_20231203_MACE_MP_0_128_L1_EP199__MO_000000000000_000",
-        "model_shortname": "MACE"
-    },
+    # {
+    #     "species": ["Al"],
+    #     "model": "EAM_CubicNaturalSpline_ErcolessiAdams_1994_Al__MO_800509458712_003",
+    #     "model_shortname": "EAMCubinNaturalSpline"
+    # },
+    # {
+    #     "species": ["Ni", "Co", "Fe", "Cr", "Mn"],
+    #     "model": "TorchML_20231203_MACE_MP_0_128_L1_EP199__MO_000000000000_000",
+    #     "model_shortname": "MACE"
+    # },
+    # {
+    #     "species": ["Co", "Cr", "Fe", "Ni"],
+    #     "model": "TorchML_20231203_MACE_MP_0_128_L1_EP199__MO_000000000000_000",
+    #     "model_shortname": "MACE"
+    # },
+    # {
+    #     "species": ["Al", "Co", "Cr", "Fe", "Ni"],
+    #     "model": "TorchML_20231203_MACE_MP_0_128_L1_EP199__MO_000000000000_000",
+    #     "model_shortname": "MACE"
+    # },
     {
         "species": ["Si"],
         "model": "TorchML_20231203_MACE_MP_0_128_L1_EP199__MO_000000000000_000",
@@ -326,8 +326,8 @@ def compute_minimum_cutoff(model:str, species:list)->float:
 for data in input_data:
     model,species,model_shortname = data["model"], data["species"], data["model_shortname"]
     calc = KIM(model)
-    logfilename = f"derivative-test-{''.join(species)}-FCC-ALLEGRO-10-600.log"
-    csv_outfile = f"derivative-test-{''.join(species)}-FCC-ALLEGRO-10-600.csv"
+    logfilename = f"derivative-test-{''.join(species)}-FCC-{model_shortname}-10-600.log"
+    csv_outfile = f"derivative-test-{''.join(species)}-FCC-{model_shortname}-10-600.csv"
     logger = SimpleLogger(logfilename)
     csvwriter = SimpleCSV(["species", "alat", "energy", "status", "errmax"], csv_outfile)
 
