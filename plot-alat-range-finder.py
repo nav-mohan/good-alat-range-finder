@@ -16,56 +16,56 @@ input_data = [
     #     "model_shortname": "SW_LeeHwang"
     # },
     # {
-    #     "species": ["Al"],
-    #     "model": "EAM_CubicNaturalSpline_ErcolessiAdams_1994_Al__MO_800509458712_003",
-    #     "model_shortname": "EAMCubinNaturalSpline"
+        # "species": ["Al"],
+        # "model": "EAM_CubicNaturalSpline_ErcolessiAdams_1994_Al__MO_800509458712_003",
+        # "model_shortname": "EAMCubinNaturalSpline"
     # },
     # {
-    #     "species": ["Ni", "Co", "Fe", "Cr", "Mn"],
-    #     "model": "TorchML_20231203_MACE_MP_0_128_L1_EP199__MO_000000000000_000",
-    #     "model_shortname": "MACE"
+        # "species": ["Ni", "Co", "Fe", "Cr", "Mn"],
+        # "model": "TorchML_20231203_MACE_MP_0_128_L1_EP199__MO_000000000000_000",
+        # "model_shortname": "MACE"
     # },
     # {
-    #     "species": ["Co", "Cr", "Fe", "Ni"],
-    #     "model": "TorchML_20231203_MACE_MP_0_128_L1_EP199__MO_000000000000_000",
-    #     "model_shortname": "MACE"
+        # "species": ["Co", "Cr", "Fe", "Ni"],
+        # "model": "TorchML_20231203_MACE_MP_0_128_L1_EP199__MO_000000000000_000",
+        # "model_shortname": "MACE"
     # },
     # {
-    #     "species": ["Al", "Co", "Cr", "Fe", "Ni"],
-    #     "model": "TorchML_20231203_MACE_MP_0_128_L1_EP199__MO_000000000000_000",
-    #     "model_shortname": "MACE"
+        # "species": ["Al", "Co", "Cr", "Fe", "Ni"],
+        # "model": "TorchML_20231203_MACE_MP_0_128_L1_EP199__MO_000000000000_000",
+        # "model_shortname": "MACE"
     # },
     # {
-    #     "species": ["Si"],
-    #     "model": "TorchML_20231203_MACE_MP_0_128_L1_EP199__MO_000000000000_000",
-    #     "model_shortname": "MACE"
+        # "species": ["Si"],
+        # "model": "TorchML_20231203_MACE_MP_0_128_L1_EP199__MO_000000000000_000",
+        # "model_shortname": "MACE"
     # },
     # {
-    #     "species" : ["H","C","N","O","S"],
-    #     "model": "TorchML_Allegro_NikidisKyriakopoulosTohidKachrimanisKioseoglou_2024_HCNOS__MO_000000000000_000",
-    #     "model_shortname" : "ALLEGRO"
+        # "species" : ["H","C","N","O","S"],
+        # "model": "TorchML_Allegro_NikidisKyriakopoulosTohidKachrimanisKioseoglou_2024_HCNOS__MO_000000000000_000",
+        # "model_shortname" : "ALLEGRO"
     # },
 
     # {
-    #     "species" : ["H"],
-    #     "model": "TorchML_Allegro_NikidisKyriakopoulosTohidKachrimanisKioseoglou_2024_HCNOS__MO_000000000000_000",
-    #     "model_shortname" : "ALLEGRO"
+        # "species" : ["H"],
+        # "model": "TorchML_Allegro_NikidisKyriakopoulosTohidKachrimanisKioseoglou_2024_HCNOS__MO_000000000000_000",
+        # "model_shortname" : "ALLEGRO"
     # },
     # {
-    #     "species" : ["C"],
-    #     "model": "TorchML_Allegro_NikidisKyriakopoulosTohidKachrimanisKioseoglou_2024_HCNOS__MO_000000000000_000",
-    #     "model_shortname" : "ALLEGRO"
+        # "species" : ["C"],
+        # "model": "TorchML_Allegro_NikidisKyriakopoulosTohidKachrimanisKioseoglou_2024_HCNOS__MO_000000000000_000",
+        # "model_shortname" : "ALLEGRO"
     # },
     # {
     #     "species" : ["N"],
     #     "model": "TorchML_Allegro_NikidisKyriakopoulosTohidKachrimanisKioseoglou_2024_HCNOS__MO_000000000000_000",
     #     "model_shortname" : "ALLEGRO"
     # },
-    # {
-    #     "species" : ["O"],
-    #     "model": "TorchML_Allegro_NikidisKyriakopoulosTohidKachrimanisKioseoglou_2024_HCNOS__MO_000000000000_000",
-    #     "model_shortname" : "ALLEGRO"
-    # },
+    {
+        "species" : ["O"],
+        "model": "TorchML_Allegro_NikidisKyriakopoulosTohidKachrimanisKioseoglou_2024_HCNOS__MO_000000000000_000",
+        "model_shortname" : "ALLEGRO"
+    },
 
     {
         "species" : ["S"],
@@ -80,7 +80,7 @@ import numpy as np
 import matplotlib.ticker as ticker
 from matplotlib.ticker import ScalarFormatter
 
-min_e = 1e-4
+min_e = 1e-2
 max_e = 1e+5
 
 def scientific_notation(x, pos):
@@ -101,6 +101,11 @@ for data in input_data:
 
     # Define colors
     colors = {0: 'red', 1: 'blue', 2: 'green', 3: 'black'}
+
+    min_cutoff:float = df['alat'].max()
+    search_range = 0.2*min_cutoff,0.8*min_cutoff
+    good_alat:float = None
+    minLED:float = None
 
     # Create a 2x2 grid of subplots
     fig, axes = plt.subplots(2, 2, figsize=(19.2 , 10.8))
@@ -140,11 +145,18 @@ for data in input_data:
                  linewidth=2, label=f'|LED| (order_d={order})')
         
         if order == 0:
+            # draw a solid line for |LED| = 1
             ax2.plot(subset['alat'], np.ones_like(subset['led']), lw=2, label="LED = 1")
+            # iterate over subset in the rnage 0.2*min_cutoff < alat < 0.8*min_cutoff and find the alat that has smalelst LED
+            subset_filtered = subset[(subset['alat'] >= search_range[0]) & (subset['alat'] <= search_range[1])]
+            min_led_row = subset_filtered.loc[np.abs(subset_filtered['led']).idxmin()]
+            good_alat = min_led_row['alat']
+            minLED = min_led_row['led']
+            ax2.scatter(good_alat,np.abs(minLED),color='black',marker='d',s=80,label=f'alat = {good_alat:.2f} Å')
 
         # Formatting
         ax1.set_title(f'Order {order}', fontsize=13)
-        ax1.set_xlabel('alat', fontsize=12)
+        ax1.set_xlabel('alat (Å)', fontsize=12)
         ax2.set_ylabel('$\\ln |LED| $', fontsize=12, rotation=0, labelpad=15)
         ax2.set_yscale('log')
         ax1.grid(True, which="both", ls="--")
