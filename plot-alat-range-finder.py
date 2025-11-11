@@ -1,58 +1,87 @@
+
 input_data = [
+    # {
+    #     "species": ["Cd", "Te"],
+    #     "model": "SW_WangStroudMarkworth_1989_CdTe__MO_786496821446_001",
+    #     "model_shortname": "SW_WangStroudMarkworth"
+    # },
+    # {
+    #     "species": ["Si"],
+    #     "model": "SW_StillingerWeber_1985_Si__MO_405512056662_006",
+    #     "model_shortname": "StillingerWebber"
+    # },
+    # {
+    #     "species": ["Si"],
+    #     "model": "SW_LeeHwang_2012GGA_Si__MO_040570764911_001",
+    #     "model_shortname": "SW_LeeHwang"
+    # },
+    # {
+    #     "species": ["Al"],
+    #     "model": "EAM_CubicNaturalSpline_ErcolessiAdams_1994_Al__MO_800509458712_003",
+    #     "model_shortname": "EAMCubinNaturalSpline"
+    # },
+    # {
+    #     "species": ["Ni", "Co", "Fe", "Cr", "Mn"],
+    #     "model": "TorchML_20231203_MACE_MP_0_128_L1_EP199__MO_000000000000_000",
+    #     "model_shortname": "MACE"
+    # },
+    # {
+    #     "species": ["Co", "Cr", "Fe", "Ni"],
+    #     "model": "TorchML_20231203_MACE_MP_0_128_L1_EP199__MO_000000000000_000",
+    #     "model_shortname": "MACE"
+    # },
+    # {
+    #     "species": ["Al", "Co", "Cr", "Fe", "Ni"],
+    #     "model": "TorchML_20231203_MACE_MP_0_128_L1_EP199__MO_000000000000_000",
+    #     "model_shortname": "MACE"
+    # },
+    # {
+    #     "species": ["Si"],
+    #     "model": "TorchML_20231203_MACE_MP_0_128_L1_EP199__MO_000000000000_000",
+    #     "model_shortname": "MACE"
+    # },
+    # {
+    #     "species" : ["H","C","N","O","S"],
+    #     "model": "TorchML_Allegro_NikidisKyriakopoulosTohidKachrimanisKioseoglou_2024_HCNOS__MO_000000000000_000",
+    #     "model_shortname" : "ALLEGRO"
+    # },
+
+    # {
+    #     "species" : ["H"],
+    #     "model": "TorchML_Allegro_NikidisKyriakopoulosTohidKachrimanisKioseoglou_2024_HCNOS__MO_000000000000_000",
+    #     "model_shortname" : "ALLEGRO"
+    # },
+    # {
+    #     "species" : ["C"],
+    #     "model": "TorchML_Allegro_NikidisKyriakopoulosTohidKachrimanisKioseoglou_2024_HCNOS__MO_000000000000_000",
+    #     "model_shortname" : "ALLEGRO"
+    # },
+    # {
+    #     "species" : ["N"],
+    #     "model": "TorchML_Allegro_NikidisKyriakopoulosTohidKachrimanisKioseoglou_2024_HCNOS__MO_000000000000_000",
+    #     "model_shortname" : "ALLEGRO"
+    # },
+    # {
+    #     "species" : ["O"],
+    #     "model": "TorchML_Allegro_NikidisKyriakopoulosTohidKachrimanisKioseoglou_2024_HCNOS__MO_000000000000_000",
+    #     "model_shortname" : "ALLEGRO"
+    # },
+
     {
-        "species": ["Cd", "Te"],
-        "model": "SW_WangStroudMarkworth_1989_CdTe__MO_786496821446_001",
-        "model_shortname": "SW_WangStroudMarkworth"
-    },
-    {
-        "species": ["Si"],
-        "model": "SW_StillingerWeber_1985_Si__MO_405512056662_006",
-        "model_shortname": "StillingerWebber"
-    },
-    {
-        "species": ["Si"],
-        "model": "SW_LeeHwang_2012GGA_Si__MO_040570764911_001",
-        "model_shortname": "SW_LeeHwang"
-    },
-    {
-        "species": ["Al"],
-        "model": "EAM_CubicNaturalSpline_ErcolessiAdams_1994_Al__MO_800509458712_003",
-        "model_shortname": "EAMCubinNaturalSpline"
-    },
-    {
-        "species": ["Ni", "Co", "Fe", "Cr", "Mn"],
-        "model": "TorchML_20231203_MACE_MP_0_128_L1_EP199__MO_000000000000_000",
-        "model_shortname": "MACE"
-    },
-    {
-        "species": ["Co", "Cr", "Fe", "Ni"],
-        "model": "TorchML_20231203_MACE_MP_0_128_L1_EP199__MO_000000000000_000",
-        "model_shortname": "MACE"
-    },
-    {
-        "species": ["Al", "Co", "Cr", "Fe", "Ni"],
-        "model": "TorchML_20231203_MACE_MP_0_128_L1_EP199__MO_000000000000_000",
-        "model_shortname": "MACE"
-    },
-    {
-        "species": ["Si"],
-        "model": "TorchML_20231203_MACE_MP_0_128_L1_EP199__MO_000000000000_000",
-        "model_shortname": "MACE"
-    },
-    {
-        "species" : ["H","C","N","O","S"],
+        "species" : ["S"],
         "model": "TorchML_Allegro_NikidisKyriakopoulosTohidKachrimanisKioseoglou_2024_HCNOS__MO_000000000000_000",
         "model_shortname" : "ALLEGRO"
     },
 ]
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib.ticker as ticker
 from matplotlib.ticker import ScalarFormatter
 
-min_e = 1e-1
-max_e = 1e+3
+min_e = 1e-4
+max_e = 1e+5
 
 def scientific_notation(x, pos):
     """ Formatter for scientific notation with 2 decimal places """
